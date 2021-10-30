@@ -1,12 +1,28 @@
 from django.db import models
 
 
+POKEMON_STATUS = {
+    'normal': 'Normal',
+    'sub_legendary': 'Sub Legendary',
+    'legendary': 'Legendary',
+    'mythical': 'Mythical'
+}
+
+
+POKEMON_STATUS_CHOICES = [
+    (POKEMON_STATUS['normal'], POKEMON_STATUS['normal']),
+    (POKEMON_STATUS['sub_legendary'], POKEMON_STATUS['sub_legendary']),
+    (POKEMON_STATUS['legendary'], POKEMON_STATUS['legendary']),
+    (POKEMON_STATUS['mythical'], POKEMON_STATUS['mythical'])
+]
+
+
 class Pokemon(models.Model):
     pokedex_number = models.PositiveSmallIntegerField()
     name = models.CharField(max_length=50)
     japanese_name = models.CharField(max_length=50)
     generation = models.PositiveSmallIntegerField()
-    status = models.CharField(max_length=50)
+    status = models.CharField(max_length=50, choices=POKEMON_STATUS_CHOICES)
     species = models.CharField(max_length=50)
     type_1 = models.CharField(max_length=50)
     type_2 = models.CharField(max_length=50)
