@@ -25,7 +25,10 @@ class PokemonStats(models.Model):
                                                                   include_mythicals)
 
         return list(
-            PokemonStats.objects.filter(pokemon__generation=generation, pokemon__status__in=available_statuses)
+            PokemonStats.objects.filter(
+                pokemon__generation=generation,
+                pokemon__status__in=available_statuses
+            )
             .order_by('-total_points')
         )
 
@@ -40,7 +43,10 @@ class PokemonStats(models.Model):
                                                                   include_mythicals)
 
         return list(
-            PokemonStats.objects.filter(Q(pokemon__type_1=type) | Q(pokemon__type_2=type))
+            PokemonStats.objects.filter(
+                Q(pokemon__type_1=type) | Q(pokemon__type_2=type),
+                pokemon__status__in=available_statuses
+            )
             .order_by('-total_points')
         )
 
@@ -58,7 +64,8 @@ class PokemonStats(models.Model):
         return list(
             PokemonStats.objects.filter(
                 Q(pokemon__type_1=type) | Q(pokemon__type_2=type),
-                pokemon__generation=generation
+                pokemon__generation=generation,
+                pokemon__status__in=available_statuses
             )
             .order_by('-total_points')
         )
