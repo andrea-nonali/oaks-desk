@@ -1,0 +1,10 @@
+*.pyc
+__pycache__
+/static
+media/*
+/.idea/
+!/.idea/dataSources.local.xml
+!/.idea/dataSources.xml
+*.sqlite3
+*/.DS_Store
+.DS_Store
