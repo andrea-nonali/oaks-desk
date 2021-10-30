@@ -37,3 +37,14 @@ class PokemonAbilitySerializer(serializers.Serializer):
     ability_hidden = serializers.CharField()
 
 
+class PokemonStatsSerializer(serializers.Serializer):
+    pokemon = serializers.CharField()
+    hp = serializers.IntegerField()
+    attack = serializers.IntegerField()
+    sp_attack = serializers.IntegerField()
+    defense = serializers.IntegerField()
+    sp_defense = serializers.IntegerField()
+    speed = serializers.IntegerField()
+    total_points = serializers.IntegerField()
+
+

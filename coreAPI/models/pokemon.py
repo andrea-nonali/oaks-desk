@@ -44,7 +44,7 @@ class Pokemon(models.Model):
         return list(self.abilities.filter(pokemon=self))
 
     def get_stats(self) -> {}:
-        return self.stats.to_dict()
+        return self.stats
 
     def get_strong_types_against(self) -> {}:
         return self.type_intersections.get_strong_types_against()

@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 
 from coreAPI.models import Pokemon
-from coreAPI.serializers import PokemonSerializer, PokemonAbilitySerializer
+from coreAPI.serializers import PokemonSerializer, PokemonAbilitySerializer, PokemonStatsSerializer
 from coreAPI.views.utils import get_pokemon
 
 
@@ -11,7 +11,7 @@ class PokemonStatsAPIView(APIView):
         pokemon = get_pokemon(request)
 
         return JsonResponse(
-            pokemon.get_stats(),
+            PokemonStatsSerializer(pokemon.get_stats()).data,
             safe=False
         )
 
