@@ -35,7 +35,20 @@ class PokemonStats(models.Model):
         )
 
     @staticmethod
-    def get_best_base_total_stats_pokemon_for_type(type: str) -> list:
+    def get_best_base_total_stats_pokemon_for_type(
+            type: str,
+            include_legendaries=True,
+            include_mythicals=True,
+            include_mega_evolutions=True
+    ) -> list:
+        available_statuses = [POKEMON_STATUS['normal'], POKEMON_STATUS['sub_legendary']]
+        if include_legendaries:
+            available_statuses.append(include_legendaries)
+        if include_mythicals:
+            available_statuses.append(include_mythicals)
+        if include_mega_evolutions:
+            available_statuses.append(include_mega_evolutions)
+
         return list(
             PokemonStats.objects.filter(Q(pokemon__type_1=type) | Q(pokemon__type_2=type))
             .order_by('-total_points')
