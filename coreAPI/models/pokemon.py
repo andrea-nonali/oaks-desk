@@ -24,12 +24,12 @@ class Pokemon(models.Model):
     def get_pokemon_by_name(name):
         return Pokemon.objects.filter(name__icontains=name).first()
 
-    def has_mega(self):
+    def has_mega_evolution(self):
         pokemon = Pokemon.objects.filter(pokedex_number=self.pokedex_number)
         return pokemon.count() > 1 and 'mega' in pokemon[1].name.lower()
 
     def get_mega_evolution(self):
-        if self.has_mega():
+        if self.has_mega_evolution():
             return Pokemon.objects.filter(pokedex_number=self.pokedex_number).all()[1]
 
     def get_abilities(self) -> []:
