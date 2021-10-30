@@ -21,13 +21,8 @@ class PokemonStats(models.Model):
             include_mythicals=True,
             include_mega_evolutions=True
     ) -> list:
-        available_statuses = [POKEMON_STATUS['normal'], POKEMON_STATUS['sub_legendary']]
-        if include_legendaries:
-            available_statuses.append(include_legendaries)
-        if include_mythicals:
-            available_statuses.append(include_mythicals)
-        if include_mega_evolutions:
-            available_statuses.append(include_mega_evolutions)
+        available_statuses = PokemonStats._get_available_statuses(include_legendaries, include_mega_evolutions,
+                                                                  include_mythicals)
 
         return list(
             PokemonStats.objects.filter(pokemon__generation=generation, pokemon__status__in=available_statuses)
@@ -41,13 +36,8 @@ class PokemonStats(models.Model):
             include_mythicals=True,
             include_mega_evolutions=True
     ) -> list:
-        available_statuses = [POKEMON_STATUS['normal'], POKEMON_STATUS['sub_legendary']]
-        if include_legendaries:
-            available_statuses.append(include_legendaries)
-        if include_mythicals:
-            available_statuses.append(include_mythicals)
-        if include_mega_evolutions:
-            available_statuses.append(include_mega_evolutions)
+        available_statuses = PokemonStats._get_available_statuses(include_legendaries, include_mega_evolutions,
+                                                                  include_mythicals)
 
         return list(
             PokemonStats.objects.filter(Q(pokemon__type_1=type) | Q(pokemon__type_2=type))
@@ -62,13 +52,8 @@ class PokemonStats(models.Model):
             include_mythicals=True,
             include_mega_evolutions=True
     ) -> list:
-        available_statuses = [POKEMON_STATUS['normal'], POKEMON_STATUS['sub_legendary']]
-        if include_legendaries:
-            available_statuses.append(include_legendaries)
-        if include_mythicals:
-            available_statuses.append(include_mythicals)
-        if include_mega_evolutions:
-            available_statuses.append(include_mega_evolutions)
+        available_statuses = PokemonStats._get_available_statuses(include_legendaries, include_mega_evolutions,
+                                                                  include_mythicals)
 
         return list(
             PokemonStats.objects.filter(
@@ -77,3 +62,14 @@ class PokemonStats(models.Model):
             )
             .order_by('-total_points')
         )
+
+    @staticmethod
+    def _get_available_statuses(include_legendaries, include_mega_evolutions, include_mythicals):
+        available_statuses = [POKEMON_STATUS['normal'], POKEMON_STATUS['sub_legendary']]
+        if include_legendaries:
+            available_statuses.append(include_legendaries)
+        if include_mythicals:
+            available_statuses.append(include_mythicals)
+        if include_mega_evolutions:
+            available_statuses.append(include_mega_evolutions)
+        return available_statuses
