@@ -32,5 +32,8 @@ class PokemonSerializer(serializers.Serializer):
 
 
 class PokemonAbilitySerializer(serializers.Serializer):
-    ability = serializers.CharField()
+    ability_1 = serializers.CharField()
+    ability_2 = serializers.CharField()
+    ability_hidden = serializers.CharField()
+
 
