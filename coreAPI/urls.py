@@ -8,5 +8,6 @@ urlpatterns = [
     path('get-strong-against-pokemons', StrongAgainstAPI.as_view()),
     path('get-neutral-against-pokemons', NeutralAgainstAPI.as_view()),
     path('get-fully-covering-pokemons', CoveringPokemonsAPI.as_view()),
-    path('get-stats', PokemonStatsAPIView.as_view())
+    path('get-stats', PokemonStatsAPIView.as_view()),
+    path('get-mega-evolutions', MegaEvolutionsAPI.as_view()),
 ]

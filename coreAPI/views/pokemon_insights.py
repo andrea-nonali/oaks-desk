@@ -81,3 +81,24 @@ class CoveringPokemonsAPI(APIView):
             covering_pokemons,
             safe=False
         )
+
+
+class MegaEvolutionsAPI(APIView):
+    def get(self, request):
+        generation = self.request.GET.get('generation')
+
+        if generation:
+            pokemons = Pokemon.objects.filter(generation=generation)
+        else:
+            pokemons = Pokemon.objects.all()
+
+        mega_pokemons = [
+            PokemonSerializer(pokemon.get_mega_evolution()).data
+            for pokemon in pokemons
+            if pokemon.has_mega_evolution()
+        ]
+
+        return JsonResponse(
+            mega_pokemons,
+            safe=False
+        )
