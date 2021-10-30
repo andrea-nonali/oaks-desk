@@ -26,7 +26,9 @@ class Pokemon(models.Model):
 
     def has_mega_evolution(self):
         pokemon = Pokemon.objects.filter(pokedex_number=self.pokedex_number)
-        return pokemon.count() > 1 and 'mega' in pokemon[1].name.lower()
+        return pokemon.count() > 1 \
+               and 'mega' in pokemon[1].name.lower() \
+               and 'mega' not in self.name.lower()
 
     def get_mega_evolution(self):
         if self.has_mega_evolution():
