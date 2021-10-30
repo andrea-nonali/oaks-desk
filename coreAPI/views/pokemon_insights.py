@@ -1,15 +1,9 @@
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse
 from rest_framework.views import APIView
 
 from coreAPI.models import Pokemon
 from coreAPI.serializers import PokemonSerializer, PokemonAbilitySerializer
-
-
-def get_pokemon(request):
-    pokemon = Pokemon.get_pokemon(request.GET.get('pokedex_number'))
-    if not pokemon:
-        return Http404()
-    return pokemon
+from coreAPI.views.utils import get_pokemon
 
 
 class PokemonStatsAPIView(APIView):
