@@ -87,10 +87,7 @@ class MegaEvolutionsAPI(APIView):
     def get(self, request):
         generation = self.request.GET.get('generation')
 
-        if generation:
-            pokemons = Pokemon.objects.filter(generation=generation)
-        else:
-            pokemons = Pokemon.objects.all()
+        pokemons = Pokemon.get_pokemons_for(generation)
 
         mega_pokemons = [
             PokemonSerializer(pokemon.get_mega_evolution()).data

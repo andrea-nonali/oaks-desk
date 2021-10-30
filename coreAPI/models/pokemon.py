@@ -24,6 +24,12 @@ class Pokemon(models.Model):
     def get_pokemon_by_name(name):
         return Pokemon.objects.filter(name__icontains=name).first()
 
+    @staticmethod
+    def get_pokemons_for(generation=None):
+        if generation:
+            return Pokemon.objects.filter(generation=generation).all()
+        return Pokemon.objects.all()
+
     def has_mega_evolution(self):
         pokemon = Pokemon.objects.filter(pokedex_number=self.pokedex_number)
         return pokemon.count() > 1 \
@@ -54,12 +60,6 @@ class Pokemon(models.Model):
 
         return [
             pokemon_to_compare
-            for pokemon_to_compare in Pokemon._get_pokemons_for(generation)
+            for pokemon_to_compare in Pokemon.get_pokemons_for(generation)
             if set(weaknesses) <= set(pokemon_to_compare.get_strong_types_against().keys())
         ]
-
-    @staticmethod
-    def _get_pokemons_for(generation=None):
-        if generation:
-            return Pokemon.objects.filter(generation=generation).all()
-        return Pokemon.objects.all()
