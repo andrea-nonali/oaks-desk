@@ -8,5 +8,9 @@ think about what gamers need to know when playing this game.
 ## Technologies
 This project uses Django and django-rest-framework.
 
+## Requirements
+* Python3.9
+* Pipenv [https://pipenv-fork.readthedocs.io/en/latest/]
+
 ## Resources
 * [https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420]
