@@ -30,8 +30,7 @@ class BestPokemonAPIView(APIView):
             include_mythicals
         )
 
-        return JsonResponse(
-            [
+        return JsonResponse([
                 PokemonStatsSerializer(pokemon_stat).data
                 for pokemon_stat in pokemon_stats
             ],
