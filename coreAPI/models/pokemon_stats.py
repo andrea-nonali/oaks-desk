@@ -19,20 +19,16 @@ class PokemonStats(models.Model):
             generation: str,
             include_legendaries=True,
             include_mythicals=True,
+            include_mega_evolutions=True
     ) -> list:
         available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
 
-        best_pokemons_stats = PokemonStats.objects.filter(
+        return PokemonStats.objects.filter(
             pokemon__generation=generation,
             pokemon__status__in=available_statuses
         ) \
             .order_by('-total_points') \
             .all()
-
-        return [
-            pokemon_stats
-            for pokemon_stats in best_pokemons_stats
-        ]
 
     @staticmethod
     def get_best_base_total_stats_pokemon_for_type(
@@ -42,17 +38,12 @@ class PokemonStats(models.Model):
     ) -> list:
         available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
 
-        best_pokemons_stats = PokemonStats.objects.filter(
+        return PokemonStats.objects.filter(
             Q(pokemon__type_1=type) | Q(pokemon__type_2=type),
             pokemon__status__in=available_statuses
         ) \
             .order_by('-total_points') \
             .all()
-
-        return [
-            pokemon_stats
-            for pokemon_stats in best_pokemons_stats
-        ]
 
     @staticmethod
     def get_best_base_total_stats_pokemon_for_generation_and_type(
@@ -63,18 +54,13 @@ class PokemonStats(models.Model):
     ) -> list:
         available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
 
-        best_pokemons_stats = PokemonStats.objects.filter(
+        return PokemonStats.objects.filter(
             Q(pokemon__type_1=type) | Q(pokemon__type_2=type),
             pokemon__status__in=available_statuses,
             pokemon__generation=generation
         ) \
             .order_by('-total_points') \
             .all()
-
-        return [
-            pokemon_stats
-            for pokemon_stats in best_pokemons_stats
-        ]
 
     @staticmethod
     def _get_available_statuses_list(include_legendaries, include_mythicals) -> []:
