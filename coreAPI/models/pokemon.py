@@ -1,13 +1,11 @@
 from django.db import models
 
-
 POKEMON_STATUS = {
     'normal': 'Normal',
     'sub_legendary': 'Sub Legendary',
     'legendary': 'Legendary',
     'mythical': 'Mythical'
 }
-
 
 POKEMON_STATUS_CHOICES = [
     (POKEMON_STATUS['normal'], POKEMON_STATUS['normal']),
@@ -50,7 +48,10 @@ class Pokemon(models.Model):
         pokemon = Pokemon.objects.filter(pokedex_number=self.pokedex_number)
         return pokemon.count() > 1 \
                and 'mega' in pokemon[1].name.lower() \
-               and 'mega' not in self.name.lower()
+               and not self.is_mega_evolution()
+
+    def is_mega_evolution(self):
+        return 'mega' in self.name.lower()
 
     def get_mega_evolution(self):
         if self.has_mega_evolution():
