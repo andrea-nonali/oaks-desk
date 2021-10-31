@@ -1,9 +1,9 @@
 from django.urls import path
 
-from coreAPI.views.abilities_view import *
+from coreAPI.views.pokemon_abilities_view import *
 from coreAPI.views.pokemon_insights import *
 from coreAPI.views.pokemon_stats_view import *
-from coreAPI.views.type_intersections_view import *
+from coreAPI.views.pokemon_type_intersections_view import *
 
 urlpatterns = [
     path('get-abilities', PokemonAbilitiesAPI.as_view()),
