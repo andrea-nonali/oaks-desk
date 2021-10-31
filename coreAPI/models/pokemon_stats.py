@@ -15,52 +15,28 @@ class PokemonStats(models.Model):
     total_points = models.PositiveSmallIntegerField()
 
     @staticmethod
-    def get_best_base_total_stats_pokemon_for_generation(
-            generation: str,
+    def get_best_base_total_stats_pokemon_for(
+            generation='',
+            type='',
             include_legendaries=True,
             include_mythicals=True,
-            include_mega_evolutions=True
     ) -> list:
+        filters = PokemonStats._get_filters(generation, type)
         available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
 
         return PokemonStats.objects.filter(
-            pokemon__generation=generation,
+            filters,
             pokemon__status__in=available_statuses
-        ) \
-            .order_by('-total_points') \
-            .all()
+        ).all().order_by('-total_points')
 
     @staticmethod
-    def get_best_base_total_stats_pokemon_for_type(
-            type: str,
-            include_legendaries=True,
-            include_mythicals=True,
-    ) -> list:
-        available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
-
-        return PokemonStats.objects.filter(
-            Q(pokemon__type_1=type) | Q(pokemon__type_2=type),
-            pokemon__status__in=available_statuses
-        ) \
-            .order_by('-total_points') \
-            .all()
-
-    @staticmethod
-    def get_best_base_total_stats_pokemon_for_generation_and_type(
-            generation: str,
-            type: str,
-            include_legendaries=True,
-            include_mythicals=True,
-    ) -> list:
-        available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
-
-        return PokemonStats.objects.filter(
-            Q(pokemon__type_1=type) | Q(pokemon__type_2=type),
-            pokemon__status__in=available_statuses,
-            pokemon__generation=generation
-        ) \
-            .order_by('-total_points') \
-            .all()
+    def _get_filters(generation, type):
+        filters = Q()
+        if generation:
+            filters |= Q(pokemon__generation=generation)
+        if type:
+            filters |= Q(Q(pokemon__type_1=type) | Q(pokemon__type_2=type))
+        return filters
 
     @staticmethod
     def _get_available_statuses_list(include_legendaries, include_mythicals) -> []:
@@ -70,3 +46,4 @@ class PokemonStats(models.Model):
         if include_mythicals:
             available_statuses.append(POKEMON_STATUS['mythical'])
         return available_statuses
+
