@@ -33,9 +33,9 @@ class PokemonStats(models.Model):
     def _get_filters(generation, type):
         filters = Q()
         if generation:
-            filters |= Q(pokemon__generation=generation)
+            filters.add(Q(pokemon__generation=generation), Q.OR)
         if type:
-            filters |= Q(Q(pokemon__type_1=type) | Q(pokemon__type_2=type))
+            filters.add(Q(Q(pokemon__type_1=type) | Q(pokemon__type_2=type)), Q.AND)
         return filters
 
     @staticmethod
