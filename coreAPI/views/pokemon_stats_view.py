@@ -22,12 +22,14 @@ class BestPokemonAPIView(APIView):
         type = self.request.GET.get('type')
         include_legendaries = False if self.request.GET.get('include_legendaries') == 'False' else True
         include_mythicals = False if self.request.GET.get('include_mythicals') == 'False' else True
+        include_mega_evolutions = False if self.request.GET.get('include_mega_evolutions') == 'False' else True
 
         pokemon_stats = PokemonStats.get_best_base_total_stats_pokemon_for(
             generation,
             type,
             include_legendaries,
-            include_mythicals
+            include_mythicals,
+            include_mega_evolutions
         )
 
         return JsonResponse([

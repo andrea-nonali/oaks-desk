@@ -20,14 +20,24 @@ class PokemonStats(models.Model):
             type='',
             include_legendaries=True,
             include_mythicals=True,
+            include_mega_evolutions=True
     ) -> []:
         filters = PokemonStats._get_filters(generation, type)
         available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
 
-        return PokemonStats.objects.filter(
+        best_pokemon_stats = PokemonStats.objects.filter(
             filters,
             pokemon__status__in=available_statuses
         ).all().order_by('-total_points')
+
+        if not include_mega_evolutions:
+            return [
+                pokemon_stat
+                for pokemon_stat in best_pokemon_stats
+                if not pokemon_stat.pokemon.is_mega_evolution()
+            ]
+
+        return best_pokemon_stats
 
     @staticmethod
     def _get_filters(generation: str, type: str) -> Q:
