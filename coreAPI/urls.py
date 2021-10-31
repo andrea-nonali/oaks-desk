@@ -1,10 +1,9 @@
 from django.urls import path
 
-from coreAPI.views.abilities_view import PokemonAbilitiesAPI
+from coreAPI.views.abilities_view import *
 from coreAPI.views.pokemon_insights import *
-from coreAPI.views.stats_view import PokemonStatsAPIView
-from coreAPI.views.type_intersections_view import WeakAgainstAPI, StrongAgainstAPI, NeutralAgainstAPI, \
-    CoveringPokemonsAPI
+from coreAPI.views.pokemon_stats_view import *
+from coreAPI.views.type_intersections_view import *
 
 urlpatterns = [
     path('get-abilities', PokemonAbilitiesAPI.as_view()),
@@ -12,6 +11,7 @@ urlpatterns = [
     path('get-strong-against-pokemons', StrongAgainstAPI.as_view()),
     path('get-neutral-against-pokemons', NeutralAgainstAPI.as_view()),
     path('get-fully-covering-pokemons', CoveringPokemonsAPI.as_view()),
-    path('get-stats', PokemonStatsAPIView.as_view()),
+    path('get-stats', PokemonStatsAPI.as_view()),
     path('get-mega-evolutions', MegaEvolutionsAPI.as_view()),
+    path('get-best_pokemons_stats', BestPokemonAPIView.as_view()),
 ]
