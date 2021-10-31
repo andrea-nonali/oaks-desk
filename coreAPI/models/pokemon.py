@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models import QuerySet
+
+from coreAPI.models import PokemonAbilities
 
 POKEMON_STATUS = {
     'normal': 'Normal',
@@ -31,33 +34,33 @@ class Pokemon(models.Model):
         return f'#{self.pokedex_number} {self.name} - {self.japanese_name}'
 
     @staticmethod
-    def get_pokemon(pokedex_number):
+    def get_pokemon(pokedex_number: int) -> 'Pokemon':
         return Pokemon.objects.filter(pokedex_number=pokedex_number).first()
 
     @staticmethod
-    def get_pokemon_by_name(name):
+    def get_pokemon_by_name(name: str) -> 'Pokemon':
         return Pokemon.objects.filter(name__icontains=name).first()
 
     @staticmethod
-    def get_pokemons_for(generation=None):
+    def get_pokemons_for(generation='') -> QuerySet:
         if generation:
             return Pokemon.objects.filter(generation=generation).all()
         return Pokemon.objects.all()
 
-    def has_mega_evolution(self):
+    def has_mega_evolution(self) -> bool:
         pokemon = Pokemon.objects.filter(pokedex_number=self.pokedex_number)
         return pokemon.count() > 1 \
                and 'mega' in pokemon[1].name.lower() \
                and not self.is_mega_evolution()
 
-    def is_mega_evolution(self):
+    def is_mega_evolution(self) -> bool:
         return 'mega' in self.name.lower()
 
-    def get_mega_evolution(self):
+    def get_mega_evolution(self) -> 'Pokemon':
         if self.has_mega_evolution():
             return Pokemon.objects.filter(pokedex_number=self.pokedex_number).all()[1]
 
-    def get_abilities(self) -> []:
+    def get_abilities(self) -> [PokemonAbilities]:
         return list(self.abilities.filter(pokemon=self))
 
     def get_stats(self) -> {}:
@@ -72,7 +75,7 @@ class Pokemon(models.Model):
     def get_neutral_types_against(self) -> {}:
         return self.type_intersections.get_neutral_types_against()
 
-    def get_fully_covering_pokemons(self, generation=None):
+    def get_fully_covering_pokemons(self, generation='') -> ['Pokemon']:
         weaknesses = self.get_weak_types_against().keys()
 
         return [
