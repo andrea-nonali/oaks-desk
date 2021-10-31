@@ -1,8 +1,7 @@
 from django.db import models
 from django.db.models import Q
 
-from coreAPI.models.pokemon import POKEMON_STATUS, Pokemon
-from coreAPI.serializers import PokemonSerializer, PokemonStatsSerializer
+from coreAPI.models.pokemon import POKEMON_STATUS
 
 
 class PokemonStats(models.Model):
