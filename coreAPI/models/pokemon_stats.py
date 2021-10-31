@@ -20,7 +20,7 @@ class PokemonStats(models.Model):
             type='',
             include_legendaries=True,
             include_mythicals=True,
-    ) -> list:
+    ) -> []:
         filters = PokemonStats._get_filters(generation, type)
         available_statuses = PokemonStats._get_available_statuses_list(include_legendaries, include_mythicals)
 
@@ -30,7 +30,7 @@ class PokemonStats(models.Model):
         ).all().order_by('-total_points')
 
     @staticmethod
-    def _get_filters(generation, type):
+    def _get_filters(generation: str, type: str) -> Q:
         filters = Q()
         if generation:
             filters.add(Q(pokemon__generation=generation), Q.OR)
