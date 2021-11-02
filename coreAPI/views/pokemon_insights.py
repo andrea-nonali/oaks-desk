@@ -11,13 +11,10 @@ class MegaEvolutionsAPI(APIView):
 
         pokemons = Pokemon.get_pokemons_for(generation)
 
-        mega_pokemons = [
-            PokemonSerializer(pokemon.get_mega_evolution()).data
-            for pokemon in pokemons
-            if pokemon.has_mega_evolution()
-        ]
-
-        return JsonResponse(
-            mega_pokemons,
+        return JsonResponse([
+                PokemonSerializer(pokemon.get_mega_evolution()).data
+                for pokemon in pokemons
+                if pokemon.has_mega_evolution()
+            ],
             safe=False
         )

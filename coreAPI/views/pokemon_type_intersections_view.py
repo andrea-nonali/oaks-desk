@@ -38,14 +38,12 @@ class NeutralAgainstAPI(APIView):
 class CoveringPokemonsAPI(APIView):
 
     def get(self, request):
+        generation = self.request.GET.get('generation')
         pokemon = get_pokemon(request)
 
-        covering_pokemons = [
-            PokemonSerializer(pokemon).data
-            for pokemon in pokemon.get_fully_covering_pokemons(self.request.GET.get('generation'))
-        ]
-
-        return JsonResponse(
-            covering_pokemons,
+        return JsonResponse([
+                PokemonSerializer(pokemon).data
+                for pokemon in pokemon.get_fully_covering_pokemons(generation)
+            ],
             safe=False
         )

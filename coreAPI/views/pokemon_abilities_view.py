@@ -9,12 +9,9 @@ class PokemonAbilitiesAPI(APIView):
     def get(self, request):
         pokemon = get_pokemon(request)
 
-        abilities = [
-            PokemonAbilitySerializer(ability).data
-            for ability in pokemon.get_abilities()
-        ]
-
-        return JsonResponse(
-            abilities,
+        return JsonResponse([
+                PokemonAbilitySerializer(ability).data
+                for ability in pokemon.get_abilities()
+            ],
             safe=False
         )
