@@ -10,7 +10,7 @@ class WeakAgainstAPI(APIView):
         pokemon = get_pokemon(request)
 
         return JsonResponse(
-            pokemon.get_weak_types_against(),
+            pokemon.type_intersections.get_weak_types_against(),
             safe=False,
         )
 
@@ -20,7 +20,7 @@ class StrongAgainstAPI(APIView):
         pokemon = get_pokemon(request)
 
         return JsonResponse(
-            pokemon.get_strong_types_against(),
+            pokemon.type_intersections.get_strong_types_against(),
             safe=False,
         )
 
@@ -30,7 +30,7 @@ class NeutralAgainstAPI(APIView):
         pokemon = get_pokemon(request)
 
         return JsonResponse(
-            pokemon.get_neutral_types_against(),
+            pokemon.type_intersections.get_neutral_types_against(),
             safe=False,
         )
 
@@ -43,7 +43,7 @@ class CoveringPokemonsAPI(APIView):
 
         return JsonResponse([
                 PokemonSerializer(pokemon).data
-                for pokemon in pokemon.get_fully_covering_pokemons(generation)
+                for pokemon in pokemon.type_intersections.get_fully_covering_pokemons(generation)
             ],
             safe=False
         )

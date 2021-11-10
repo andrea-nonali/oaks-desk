@@ -65,21 +65,3 @@ class Pokemon(models.Model):
 
     def get_stats(self) -> {}:
         return self.stats
-
-    def get_strong_types_against(self) -> {}:
-        return self.type_intersections.get_strong_types_against()
-
-    def get_weak_types_against(self) -> {}:
-        return self.type_intersections.get_weak_types_against()
-
-    def get_neutral_types_against(self) -> {}:
-        return self.type_intersections.get_neutral_types_against()
-
-    def get_fully_covering_pokemons(self, generation='') -> ['Pokemon']:
-        weaknesses = self.get_weak_types_against().keys()
-
-        return [
-            pokemon_to_compare
-            for pokemon_to_compare in Pokemon.get_pokemons_for(generation)
-            if set(weaknesses) <= set(pokemon_to_compare.get_strong_types_against().keys())
-        ]
