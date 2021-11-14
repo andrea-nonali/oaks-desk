@@ -23,6 +23,7 @@ class PokemonModelSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PokemonSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     pokedex_number = serializers.IntegerField()
     name = serializers.CharField()
     generation = serializers.IntegerField()
