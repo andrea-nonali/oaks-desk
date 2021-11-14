@@ -4,17 +4,15 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Pokemon from './components/Pokemon';
-import Generation from './components/Generation';
 import InvalidRoute from './components/InvalidRoute';
+import PokemonList from './components/PokemonList';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="pokemon" element={<Pokemon />} />
-      <Route path="generation" element={<Generation />} />
+      <Route path="pokemon-list" element={<PokemonList />} />
       <Route
       path="*"
       element={<InvalidRoute />}
