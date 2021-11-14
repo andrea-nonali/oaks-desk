@@ -5,13 +5,11 @@ from coreAPI.models import Pokemon
 from coreAPI.serializers import PokemonSerializer
 
 
-class PokemonsAPI(APIView):
+class PokemonDataAPI(APIView):
     def get(self, request):
-        return JsonResponse([
-            PokemonSerializer(pokemon).data
-            for pokemon in Pokemon.objects.all()
-        ],
+        return JsonResponse(
+            PokemonSerializer(
+                Pokemon.get_pokemon(self.request.GET.get('pokemon-id'))
+            ).data,
             safe=False
         )
-
-
