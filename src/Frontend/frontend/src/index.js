@@ -4,8 +4,9 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Pokemon from './components/pokemon';
-import Generation from './components/generation';
+import Pokemon from './components/Pokemon';
+import Generation from './components/Generation';
+import InvalidRoute from './components/InvalidRoute';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,10 @@ ReactDOM.render(
       <Route path="/" element={<App />} />
       <Route path="pokemon" element={<Pokemon />} />
       <Route path="generation" element={<Generation />} />
+      <Route
+      path="*"
+      element={<InvalidRoute />}
+    />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>,
