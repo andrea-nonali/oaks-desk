@@ -1,17 +1,14 @@
 import './App.css';
 import { Link } from "react-router-dom";
+import Navbar from './components/Navbar';
 
 export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className=" border-2">
-          <h1>Hello Tailwind</h1>
-        </div>
+       <Navbar />
       </header>
-
-      <nav>
-        <Link to="/pokemon-list">Pokemon List</Link></nav>
+      <div className="h-screen bg-red-300" />
     </div>
   );
 }
