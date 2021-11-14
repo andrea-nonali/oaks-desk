@@ -16,10 +16,10 @@ export default function Pokemon() {
   return (
     <div>
         <div className="flex">
-          <div className="w-1/6 bg-gray-500 h-12 h-screen">
+          <div className="w-1/6 bg-gray-500 h-screen">
             <img class="w-30 h-30 rounded-full m-2 p-2" src="/blank-profile.png" alt="" width="200" height="200"/>
           </div>
-          <div className="w-5/6 bg-red-500 h-12 h-screen">
+          <div className="w-5/6 bg-red-500 h-screen">
             <h1 className="mt-3 text-5xl font-extrabold">{pokemonData.name}</h1>
             <p className="font-extralight ml-2">Generation {pokemonData.generation}</p>
             <div className="mt-3">
