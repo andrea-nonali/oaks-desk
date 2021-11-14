@@ -11,8 +11,7 @@ export default function App() {
       </header>
 
       <nav>
-        <Link to="/pokemon-list">Pokemon List</Link> |{" "}
-      </nav>
+        <Link to="/pokemon-list">Pokemon List</Link></nav>
     </div>
   );
 }
