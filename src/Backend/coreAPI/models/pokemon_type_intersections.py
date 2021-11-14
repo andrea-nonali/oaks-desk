@@ -51,7 +51,7 @@ class PokemonTypeIntersections(models.Model):
             if value == 1
        }
 
-    def get_fully_covering_pokemons(self, generation='') -> [Pokemon ]:
+    def get_fully_covering_pokemons(self, generation='') -> [Pokemon]:
         weaknesses = self.get_weak_types_against().keys()
 
         return [
