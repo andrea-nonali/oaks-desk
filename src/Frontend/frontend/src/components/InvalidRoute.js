@@ -7,10 +7,7 @@ export default function InvalidRoute() {
                   There is nothing here
               </h1>
               <div className="flex flex-col justify-center items-center">
-                <img 
-                    src="/pikacu_nothing.gif" 
-                    alt="sad-pikachu"
-                />
+                <img src="/pikacu_nothing.gif" alt="sad-pikachu"/>
               </div>
             </div>
           </header>
