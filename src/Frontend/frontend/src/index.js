@@ -6,18 +6,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import InvalidRoute from './components/InvalidRoute';
 import PokemonList from './components/PokemonList';
+import Pokemon from './components/Pokemon';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="pokemon-list" element={<PokemonList />} />
-      <Route
-      path="*"
-      element={<InvalidRoute />}
-    />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="pokemon-list" element={<PokemonList />} />
+        <Route path="pokemon/:pokemonId" element={<Pokemon />} />
+        <Route path="*" element={<InvalidRoute />} />
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
