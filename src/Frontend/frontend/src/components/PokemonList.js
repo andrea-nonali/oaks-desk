@@ -18,24 +18,26 @@ export default function PokemonList() {
           <header className="PokemonList-header">
               <Navbar />
           </header>
-            <div className=" border-2">
+            <div className="mt-3">
                 <h1 className="flex-auto text-xl font-medium">Lista di Pokemon</h1>
             </div>
-            <div>
-                {
-                    pokemonList.map( pokemon => {
-                        return (
-                            <div key={pokemon.id}>
-                                <Link className="flex-auto text-s"
-                                    to={`/pokemon/${pokemon.id}`}
-                                >
-                                    { pokemon.name }
-                                </Link>
-                                <br/>
-                            </div>
-                        )
-                    })
-                }
+            <div className="mt-5">
+                <div>
+                    {
+                        pokemonList.map( pokemon => {
+                            return (
+                                <div key={pokemon.id}>
+                                    <Link className="flex-auto text-s"
+                                        to={`/pokemon/${pokemon.id}`}
+                                    >
+                                        { pokemon.name }
+                                    </Link>
+                                    <br/>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </div>
       );
