@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .nav-item {
+        @apply mr-3 p-4 hover:text-green-500 transition duration-300
+    }
+  }
