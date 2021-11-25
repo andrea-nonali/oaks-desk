@@ -1,8 +1,6 @@
 from django.db import models
 from django.db.models import QuerySet
 
-from coreAPI.models import PokemonAbilities
-
 POKEMON_STATUS = {
     'normal': 'Normal',
     'sub_legendary': 'Sub Legendary',
@@ -55,9 +53,6 @@ class Pokemon(models.Model):
     def get_mega_evolution(self) -> 'Pokemon':
         if self.has_mega_evolution():
             return Pokemon.objects.filter(pokedex_number=self.pokedex_number).all()[1]
-
-    def get_abilities(self) -> [PokemonAbilities]:
-        return list(self.abilities.filter(pokemon=self))
 
     def get_stats(self) -> {}:
         return self.stats
