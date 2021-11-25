@@ -34,14 +34,6 @@ class Pokemon(models.Model):
         return f'#{self.pokedex_number} {self.name} - {self.japanese_name}'
 
     @staticmethod
-    def get_pokemon_by_pokedex_number(pokedex_number: int) -> 'Pokemon':
-        return Pokemon.objects.filter(pokedex_number=pokedex_number).first()
-
-    @staticmethod
-    def get_pokemon_by_id(pokemon_id: int) -> 'Pokemon':
-        return Pokemon.objects.filter(id=pokemon_id).first()
-
-    @staticmethod
     def get_pokemon_by_name(name: str) -> 'Pokemon':
         return Pokemon.objects.filter(name__icontains=name).first()
 
