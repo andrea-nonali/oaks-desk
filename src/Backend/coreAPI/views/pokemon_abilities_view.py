@@ -1,13 +1,13 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
+from coreAPI.models import Pokemon
 from coreAPI.serializers import PokemonAbilitySerializer
-from coreAPI.views.utils import get_pokemon
 
 
 class PokemonAbilitiesAPI(APIView):
     def get(self, request):
-        pokemon = get_pokemon(request)
+        pokemon = Pokemon.get_pokemon_by_id(self.request.GET.get('pokemon_id'))
 
         return JsonResponse([
                 PokemonAbilitySerializer(ability).data

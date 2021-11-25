@@ -9,7 +9,7 @@ class PokemonDataAPI(APIView):
     def get(self, request):
         return JsonResponse(
             PokemonSerializer(
-                Pokemon.get_pokemon_by_id(self.request.GET.get('pokemon-id'))
+                Pokemon.get_pokemon_by_id(self.request.GET.get('pokemon_id'))
             ).data,
             safe=False
         )

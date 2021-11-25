@@ -1,13 +1,13 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
+from coreAPI.models import Pokemon
 from coreAPI.serializers import PokemonSerializer
-from coreAPI.views.utils import get_pokemon
 
 
 class WeakAgainstAPI(APIView):
     def get(self, request):
-        pokemon = get_pokemon(request)
+        pokemon = Pokemon.get_pokemon_by_id(self.request.GET.get('pokemon_id'))
 
         return JsonResponse(
             pokemon.type_intersections.get_weak_types_against(),
@@ -17,7 +17,7 @@ class WeakAgainstAPI(APIView):
 
 class StrongAgainstAPI(APIView):
     def get(self, request):
-        pokemon = get_pokemon(request)
+        pokemon = Pokemon.get_pokemon_by_id(self.request.GET.get('pokemon_id'))
 
         return JsonResponse(
             pokemon.type_intersections.get_strong_types_against(),
@@ -27,7 +27,7 @@ class StrongAgainstAPI(APIView):
 
 class NeutralAgainstAPI(APIView):
     def get(self, request):
-        pokemon = get_pokemon(request)
+        pokemon = Pokemon.get_pokemon_by_id(self.request.GET.get('pokemon_id'))
 
         return JsonResponse(
             pokemon.type_intersections.get_neutral_types_against(),
@@ -39,7 +39,7 @@ class CoveringPokemonsAPI(APIView):
 
     def get(self, request):
         generation = self.request.GET.get('generation')
-        pokemon = get_pokemon(request)
+        pokemon = Pokemon.get_pokemon_by_id(self.request.GET.get('pokemon_id'))
 
         return JsonResponse([
                 PokemonSerializer(pokemon).data
