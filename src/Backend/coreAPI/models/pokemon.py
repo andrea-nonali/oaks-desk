@@ -53,6 +53,3 @@ class Pokemon(models.Model):
     def get_mega_evolution(self) -> 'Pokemon':
         if self.has_mega_evolution():
             return Pokemon.objects.filter(pokedex_number=self.pokedex_number).all()[1]
-
-    def get_stats(self) -> {}:
-        return self.stats

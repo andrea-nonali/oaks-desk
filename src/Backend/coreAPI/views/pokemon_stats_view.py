@@ -11,7 +11,7 @@ class PokemonStatsAPI(APIView):
         pokemon = get_object_or_404(Pokemon, id=self.request.GET.get('pokemon_id'))
 
         return JsonResponse(
-            PokemonStatsSerializer(pokemon.get_stats()).data,
+            PokemonStatsSerializer(pokemon.stats).data,
             safe=False
         )
 
