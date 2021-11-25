@@ -19,7 +19,7 @@ export default function PokemonList() {
               <Navbar />
           </header>
             <div className="mt-3">
-                <h1 className="flex-auto text-xl font-medium">Lista di Pokemon</h1>
+                <h1 className="flex-auto text-3xl font-medium">Full Pokedex</h1>
             </div>
             <div className="mt-5">
                 <div>
