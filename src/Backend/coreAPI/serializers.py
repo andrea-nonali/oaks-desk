@@ -48,5 +48,3 @@ class PokemonStatsSerializer(serializers.Serializer):
     sp_defense = serializers.IntegerField()
     speed = serializers.IntegerField()
     total_points = serializers.IntegerField()
-
-
