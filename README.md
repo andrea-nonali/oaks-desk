@@ -1,28 +1,70 @@
 # Oak's Desk
 
-## Why
+A Pokémon competitive battle analytics API and dashboard. The dataset covers all 8 generations (updated through 2020).
 
-I wanted to join my passion for computer science and competitive pokemon battles. For this reason, I searched for a rich dataset regarding all 8 generations pokemon.
-I decided to create an API to retrieve useful informations about pokemons, with the goal of letting competitive players gain useful informations that other popular websites don't provide. <br/><br/>
-🌟The coolest feature is to automatically find pokemons that fully cover the type weaknesses of anohter.
+**Coolest feature:** given any Pokémon, the API finds every other Pokémon that fully covers its type weaknesses, a query no popular competitive site provides directly.
 
-## Technologies
+---
 
-#### Backend
+## Stack
 
-* Django
-* django-rest-framework
-* Pipenv
+**Backend** — Django · Django REST Framework · SQLite · Pipenv  
+**Frontend** — React · Tailwind CSS
 
-#### Frontend
+---
 
-* React 
-* Tailwind CSS
+## API Endpoints
+
+| Endpoint | Query params | Description |
+|---|---|---|
+| `GET /api/get-all-pokemons` | — | All Pokémon |
+| `GET /api/get-pokemon-data` | `pokemon_id` | Full data for a single Pokémon |
+| `GET /api/get-abilities` | `pokemon_id` | Abilities for a Pokémon |
+| `GET /api/get-stats` | `pokemon_id` | Base stats for a Pokémon |
+| `GET /api/get-weak-against-pokemons` | `pokemon_id` | Types this Pokémon is weak against (multiplier > 1) |
+| `GET /api/get-strong-against-pokemons` | `pokemon_id` | Types this Pokémon resists (multiplier < 1) |
+| `GET /api/get-neutral-against-pokemons` | `pokemon_id` | Types this Pokémon is neutral to |
+| `GET /api/get-fully-covering-pokemons` | `pokemon_id`, `generation` (optional) | Pokémon that cover all type weaknesses |
+| `GET /api/get-mega-evolutions` | `generation` (optional) | All Pokémon with a mega evolution |
+| `GET /api/get-best_pokemons_stats` | `generation`, `type`, `include_legendaries`, `include_mythicals`, `include_mega_evolutions` | Pokémon ranked by base stat total |
+
+---
+
+## Quick Start
+
+### Backend
+
+```bash
+cd src/Backend
+pipenv install
+pipenv run python manage.py migrate
+pipenv run python manage.py runserver
+```
+
+### Frontend
+
+```bash
+cd src/Frontend/frontend
+npm install
+npm start
+```
+
+### Tests
+
+```bash
+cd src/Backend
+pipenv run python manage.py test coreAPI
+```
+
+---
 
 ## Requirements
 
-* Python3.9
-* Pipenv [https://pipenv-fork.readthedocs.io/en/latest/]
+- Python 3.9, Pipenv
+- Node.js
 
-## Resources
-* [https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420]
+---
+
+## Data Source
+
+[Complete Pokémon dataset (Kaggle)](https://www.kaggle.com/mariotormo/complete-pokemon-dataset-updated-090420)
